@@ -4,9 +4,14 @@
 #include <string>
 #include <vector>
 
+struct File {
+  std::string name;
+  double size;
+};
+
 class DirectoryHandler{
   private:
-    std::vector<std::string> _directories;
+    std::vector<File> _files;
     std::string _root;
 
   public:
