@@ -13,10 +13,11 @@ std::string DirectoryHandler::get_current_dir(){
   return current_working_dir;
 }
 
-void DirectoryHandler::find_folders(const char *path){
+void DirectoryHandler::find_folders(const int argc, const char *path){
   struct dirent *entry = nullptr;
   DIR *dir = nullptr;
-  dir = opendir(path);
+  std::string cwd = get_current_dir();
+  dir = opendir(argc > 1 ? path : cwd.c_str() );
 
   if(dir != nullptr) {
     while((entry = readdir(dir))){
