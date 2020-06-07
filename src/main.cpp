@@ -5,7 +5,10 @@
 int main(int argc, char *argv[]){
   DirectoryHandler dirHandler;
 
-  dirHandler.find_folders(argc, argv);
+  char ROOT = '/';
+
+  dirHandler.find_folders(argc > 1 ? argv[1] : &ROOT);
+
   dirHandler.list_dirs();
   return 0;
 }

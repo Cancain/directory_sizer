@@ -6,11 +6,11 @@
 
 class DirectoryHandler{
   private:
-    std::vector<std::string> _folders;
+    std::vector<std::string> _directories;
     std::string _root;
 
   public:
-    void find_folders(int argv, char *path[]);
+    void find_folders(const char *path);
     void list_dirs() const;
 };
 

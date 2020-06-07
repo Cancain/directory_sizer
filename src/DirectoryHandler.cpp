@@ -3,15 +3,15 @@
 #include <dirent.h>
 #include "DirectoryHandler.h"
 
-void DirectoryHandler::find_folders(int argc, char *path[]){
+void DirectoryHandler::find_folders(const char *path){
   struct dirent *entry = nullptr;
   DIR *dir = nullptr;
 
-  dir = opendir(argc > 1 ? path[1] : "/");
+  dir = opendir(path);
 
   if(dir != nullptr) {
     while((entry = readdir(dir))){
-      _folders.push_back(entry->d_name);
+      _directories.push_back(entry->d_name);
     }
   }
 
@@ -19,7 +19,7 @@ void DirectoryHandler::find_folders(int argc, char *path[]){
 }
 
 void DirectoryHandler::list_dirs() const{
-  for (const std::string dirname : _folders){
+  for (const std::string dirname : _directories){
     std::cout << dirname << std::endl;
   }
 }
