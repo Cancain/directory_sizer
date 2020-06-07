@@ -12,6 +12,7 @@ class DirectoryHandler{
   public:
     void find_folders(const char *path);
     void list_dirs() const;
+    std::string get_current_dir();
 };
 
 #endif

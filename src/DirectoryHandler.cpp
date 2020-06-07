@@ -2,11 +2,20 @@
 #include <stdio.h>
 #include <dirent.h>
 #include "DirectoryHandler.h"
+#include <unistd.h>
+#include <limits.h>
+
+std::string DirectoryHandler::get_current_dir(){
+  char buff[FILENAME_MAX];
+
+  getcwd(buff, FILENAME_MAX);
+  std::string current_working_dir(buff);
+  return current_working_dir;
+}
 
 void DirectoryHandler::find_folders(const char *path){
   struct dirent *entry = nullptr;
   DIR *dir = nullptr;
-
   dir = opendir(path);
 
   if(dir != nullptr) {
