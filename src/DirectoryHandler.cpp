@@ -1,6 +1,4 @@
-#ifndef _DIRECTORY_HANDLER_H_
-#define _DIRECTORY_HANDLER_H_
-
+#include <iostream>
 #include <stdio.h>
 #include <dirent.h>
 #include "DirectoryHandler.h"
@@ -13,11 +11,16 @@ void DirectoryHandler::find_folders(int argc, char *path[]){
 
   if(dir != nullptr) {
     while((entry = readdir(dir))){
-      printf("%s\n", entry->d_name);
+      _folders.push_back(entry->d_name);
     }
   }
 
   closedir(dir);
 }
 
-#endif
+void DirectoryHandler::list_dirs() const{
+  for (const std::string dirname : _folders){
+    std::cout << dirname << std::endl;
+  }
+}
+
