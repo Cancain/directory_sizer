@@ -6,6 +6,7 @@
 #include <limits.h>
 #include <sys/stat.h>
 #include <math.h>
+#include <string.h>
 
 std::string DirectoryHandler::get_current_dir(){
   char buff[FILENAME_MAX];
@@ -36,10 +37,33 @@ void DirectoryHandler::find_folders(const int argc, const char *path){
   closedir(dir);
 }
 
+std::string DirectoryHandler::human_readable_size(double bytes) const{
+  std::string affix {};
+  double size {};
+
+  if(bytes < 1000) {
+    size = bytes;
+    affix = "bytes";
+  }
+
+  if(bytes > 1000){
+    size = bytes / 1000;
+    affix = "kb";
+  }
+
+  if(bytes > 10000){
+    size = bytes / pow(1000, 2);
+
+  }
+
+  return std::to_string(size) + " " + affix;
+}
+
 void DirectoryHandler::list_dirs() const{
   for (const File file : _files){
+    std::string size = human_readable_size(file.size);
 
-    std::cout << file.name << " : " << file.size << std::endl;
+    std::cout << file.name << " : " << size << std::endl;
   }
 }
 

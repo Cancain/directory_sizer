@@ -11,13 +11,14 @@ struct File {
 
 class DirectoryHandler{
   private:
+    std::string get_current_dir();
     std::vector<File> _files;
     std::string _root;
+    std::string human_readable_size(double bytes) const;
 
   public:
     void find_folders(const int argc, const char *path);
     void list_dirs() const;
-    std::string get_current_dir();
 };
 
 #endif
